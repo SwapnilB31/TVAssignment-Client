@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState,useRef} from 'react'
 import {Grid,CircularProgress, Button} from '@material-ui/core'
 import RestaurantCard from './RestaurantCard'
 import styled from 'styled-components'
@@ -27,7 +27,7 @@ export default function RestaurantList() {
 
   const {format,occasion,priceRange,sortBy,restList,restListLoading} = state
 
-  const fetchData = () => {
+  const fetchData = useRef(() => {
     const formats = []
     const formatKeys = Object.keys(state.format)
     for(let key of formatKeys) {
@@ -74,10 +74,10 @@ export default function RestaurantList() {
       dispatch({type : filterActions.setRestList, payload : []})
       setLoadErr("Network Error! Couldn't fetch data.")
     })
-  }
+  })
 
   useEffect(() => {
-    fetchData()
+    fetchData.current()
   },[format,occasion,priceRange,sortBy])
 
   const index = Math.floor(Math.random() * 8)
@@ -97,18 +97,18 @@ export default function RestaurantList() {
           <MutedText>
             {loadError}
           </MutedText>
-          <Button color="secondary" onClick={() => fetchData()}>RELOAD</Button>
+          <Button color="secondary" onClick={() => fetchData.current()}>RELOAD</Button>
         </Container>
       </Grid>
     )
     }
-    {!restListLoading && loadError === '' &&  restList.length == 0 && (
+    {!restListLoading && loadError === '' &&  restList.length === 0 && (
       <Grid item xs={12}>
         <Container>
           <MutedText>No Restaurants Match the selected fiters</MutedText>
         </Container>
       </Grid>
-    )}
+    )} 
     {!restListLoading && loadError === '' &&  restList.length > 0 && (
         restList.map((val,ind) => (
           <Grid item sm={12} md={6} lg={4} key={uuid()}>

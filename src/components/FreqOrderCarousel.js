@@ -5,9 +5,6 @@ import "react-multi-carousel/lib/styles.css"
 import FreqRestaurantCard from './FreqRestaurantCard';
 import {makeStyles,Button,CircularProgress} from '@material-ui/core';
 import {ArrowBackIos,ArrowForwardIos} from '@material-ui/icons'
-import restaurantList from '../data/restaurantList';
-import { useFilter } from '../contexts/FilterProvider'
-import { filterActions } from '../Stores/FiltersStore'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -149,6 +146,7 @@ function FreqOrderCarousel() {
       }
     })
     .catch(err => {
+      setLoading(false)
       setRestList([])
       setLoadError("Network Error! Couldn't fetch data.")
     })
@@ -171,7 +169,7 @@ function FreqOrderCarousel() {
       {!loading && loadError !== '' && (
         <Container>
           <MutedText>{loadError}</MutedText>
-          <Button color="secondary">RELOAD</Button>
+          <Button color="secondary" onClick={() => fetchData()}>RELOAD</Button>
         </Container>
       )}
       {!loading && loadError === '' && (

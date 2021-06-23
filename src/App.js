@@ -5,9 +5,7 @@ import {
   Container,
   Typography,
   Button,
-  Paper
 } from '@material-ui/core';
-import RestaurantCard from './components/RestaurantCard';
 import OptionsList from './components/OptionsList';
 import {SpaceBWDiv, ResultsTextDiv,LightRoseBGDiv,SpacerDiv} from './components/CustomStyledComponents';
 import FiltersChipBoard from './components/FiltersChipBoard';

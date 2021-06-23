@@ -1,4 +1,3 @@
-import React from "react";
 
 export const filterActions = Object.freeze({
   setFormatChecked : "setFormatValue",
