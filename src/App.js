@@ -110,7 +110,7 @@ function App() {
           </Grid>
           {isMobile && <Grid item xs={12} sm={8} md={9}>
             <ResultsTextDiv>
-              <Typography variant="subtitle2">RESULTS(9) {!state.restListLoading && `(${state.restList.length})`}</Typography>
+              <Typography variant="subtitle2">RESULTS {!state.restListLoading && `(${state.restList.length})`}</Typography>
             </ResultsTextDiv>
           </Grid>}
           <Grid item xs={12} sm={7} md={9} className={styles.mt}>
