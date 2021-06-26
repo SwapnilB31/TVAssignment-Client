@@ -100,7 +100,7 @@ export default function OptionsList() {
         <div className={classes.mt3}></div>
         <ListItem button dense onClick={() => setOprenPrice(prev => !prev)}>
           <ListItemText classes={{primary : classes.liTypo}} primary={`Price ${labelValue(state.priceRange[0])} - ${labelValue(state.priceRange[1])}`}/>
-          {openFormat ? <ExpandLess/> : <ExpandMore/>}
+          {openPrice ? <ExpandLess/> : <ExpandMore/>}
         </ListItem>
         <Collapse in={openPrice} timeout="auto">
           <Grid container>
@@ -122,7 +122,7 @@ export default function OptionsList() {
         <div className={classes.mt3}></div> 
         <ListItem button dense onClick={() => setOpenOccasion(prev => !prev)}>
           <ListItemText primary="Occassion" classes={{primary : classes.liTypo}}/>
-          {openFormat ? <ExpandLess/> : <ExpandMore/>}
+          {openOccasion ? <ExpandLess/> : <ExpandMore/>}
         </ListItem>
         <Collapse in={openOccasion} timeout="auto">
           <FormGroup

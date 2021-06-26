@@ -1,4 +1,4 @@
-import React, {useEffect, useState,useRef} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Grid,CircularProgress, Button} from '@material-ui/core'
 import RestaurantCard from './RestaurantCard'
 import styled from 'styled-components'
@@ -27,7 +27,7 @@ export default function RestaurantList() {
 
   const {format,occasion,priceRange,sortBy,restList,restListLoading} = state
 
-  const fetchData = useRef(() => {
+  const fetchData = () => {
     const formats = []
     const formatKeys = Object.keys(state.format)
     for(let key of formatKeys) {
@@ -43,6 +43,9 @@ export default function RestaurantList() {
     }
     
     const priceRangeVal = [Math.round(priceRange[0]*30),Math.round(priceRange[1]*30)]
+
+    console.log({format,occasion,priceRange,sortBy})
+
     dispatch({type : filterActions.setRestListLoading, payload : true})
     fetch("http://localhost:5000/searchRestaurants",{
       method : "POST",
@@ -74,10 +77,10 @@ export default function RestaurantList() {
       dispatch({type : filterActions.setRestList, payload : []})
       setLoadErr("Network Error! Couldn't fetch data.")
     })
-  })
+  }
 
   useEffect(() => {
-    fetchData.current()
+    fetchData()
   },[format,occasion,priceRange,sortBy])
 
   const index = Math.floor(Math.random() * 8)
@@ -97,7 +100,7 @@ export default function RestaurantList() {
           <MutedText>
             {loadError}
           </MutedText>
-          <Button color="secondary" onClick={() => fetchData.current()}>RELOAD</Button>
+          <Button color="secondary" onClick={() => fetchData()}>RELOAD</Button>
         </Container>
       </Grid>
     )
